@@ -1,8 +1,8 @@
 import { Router } from 'express';
 import { parseISO } from 'date-fns';
 
-import CreateAppointmentsService from '../services/CreateAppointmentsService';
-import GetPaginateAppointmentService from '../services/GetPaginateAppointmentService';
+import CreateAppointmentsService from '../services/appointments/CreateAppointmentsService';
+import GetPaginateAppointmentService from '../services/appointments/GetPaginateAppointmentService';
 
 const appointmentsRouter = Router();
 
@@ -16,14 +16,14 @@ appointmentsRouter.get('/v1', async (request, response) => {
 
 appointmentsRouter.post('/v1', async (request, response) => {
   try {
-    const { provider, date } = request.body;
+    const { provider_id, date } = request.body;
 
     const service = new CreateAppointmentsService();
 
     const parsedDate = parseISO(date);
 
     const newAppointment = await service.execute({
-      provider,
+      provider_id,
       date: parsedDate,
     });
 
