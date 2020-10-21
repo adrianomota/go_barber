@@ -1,10 +1,13 @@
 import { Router } from 'express';
 import { parseISO } from 'date-fns';
 
+import ensureAuthentication from '../middlewares/ensureAuthentication';
 import CreateAppointmentsService from '../services/appointments/CreateAppointmentsService';
 import GetPaginateAppointmentService from '../services/appointments/GetPaginateAppointmentService';
 
 const appointmentsRouter = Router();
+
+appointmentsRouter.use(ensureAuthentication);
 
 appointmentsRouter.get('/v1', async (request, response) => {
   const service = new GetPaginateAppointmentService();

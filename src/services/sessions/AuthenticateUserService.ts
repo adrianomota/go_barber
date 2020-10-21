@@ -29,9 +29,9 @@ class AuthenticateUserService {
       throw new Error('User or email invalid!');
     }
 
-    const token = sign({}, `${process.env.secret}`, {
+    const token = sign({}, `${process.env.SECRET}`, {
       subject: user.id,
-      expiresIn: '1d',
+      expiresIn: process.env.EXPIRESIN,
     });
 
     return {
